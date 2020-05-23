@@ -1,0 +1,25 @@
+{
+  "name": "taller-motos",
+  "version": "1.0.0",
+  "description": "practica taller de motos",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JsonVM/taller-motos.git"
+  },
+  "author": "JsonVM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JsonVM/taller-motos/issues"
+  },
+  "homepage": "https://github.com/JsonVM/taller-motos#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.2.1"
+  }
+}
