@@ -23,8 +23,8 @@ app.use(rutas_autenticacion);
 //const rutas_mantenimiento = require("./routes/modulo_mantenimiento");
 //app.use(rutas_mantenimiento);
 
-//const rutas_motos = require("./routes/modulo_motos");
-//app.use(rutas_motos);
+const rutas_motos = require("./routes/motos");
+app.use(rutas_motos);
 
   // Puerto
   //const port = process.env.PORT || 3001;
