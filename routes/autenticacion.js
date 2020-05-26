@@ -6,7 +6,6 @@ router.use((req, res, next) => {
   try {
     let url = req.url;
     if (url === "/login") {
-      // Sigue en la busqueda de otros recursos
       next();
     } else {
       let token = req.headers.token;

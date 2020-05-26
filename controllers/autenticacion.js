@@ -31,7 +31,7 @@ let validarLogin = (persona) => {
  */
 let consultarPersona = async (persona) => {
   let _servicio = new ServicioPg();
-  let sql = `SELECT * FROM public.usuarios WHERE id = '${persona.documento}' AND clave = md5('${persona.clave}')`;
+  let sql = `SELECT * FROM public.usuarios WHERE documento = '${persona.documento}' AND clave = md5('${persona.clave}')`;
   let valores = [persona.documento, persona.clave];
   let respuesta = await _servicio.ejecutarSql(sql, valores);
   console.log(sql);
