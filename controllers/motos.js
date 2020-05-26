@@ -170,7 +170,6 @@ let eliminarMoto = async (id) => {
         nro_tecnomecanica='${moto.nro_tecnomecanica}',
         vencimiento_tecnomecanica='${moto.nro_tecnomecanica}'
         WHERE placa ='${placa}';`;
-        console.log(sql);
 
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
