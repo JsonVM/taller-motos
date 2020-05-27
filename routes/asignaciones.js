@@ -39,20 +39,20 @@ router.post("/asignaciones", (req, res) => {
 /**
  * Eliminar una asignacion
  */
-router.delete("/asignaciones/:placa/:id_mecanico/:fecha", (req, res) => {
+router.delete("/asignaciones/:placa/:id_mecanico/:fecha/", (req, res) => {
   let p = req.params.placa;
   let id_mec = req.params.id_mecanico;
   let fe = req.params.fecha;
-  let u = req.body;
 
+  let asignacion = req.body;
   let asig = {
     placa: p,
     id_mecanico: id_mec,
     fecha : fe
   }
-  console.log("asignacion desde routes delete: "+asig);
+
     _controlador
-      .eliminarAsignacion(asig)
+      .eliminarAsignacion(asig, asignacion)
       .then((respuestaDB) => {
         res.send({ ok: true, info: {}, mensaje: "asignacion eliminada correctamente" });
       })
@@ -65,14 +65,19 @@ router.delete("/asignaciones/:placa/:id_mecanico/:fecha", (req, res) => {
  * Modificar un asignacion
  */
 router.put("/asignaciones/:placa/:id_mecanico/:fecha", (req, res) => {
-    let placa = req.params.placa;
-    let id_mecanico = req.params.id_mecanico;
-    let fecha = req.params.fecha;
+    let p = req.params.placa;
+    let id_mec = req.params.id_mecanico;
+    let fe = req.params.fecha;
     let u = req.body;
 
-    console.log(u);
+    let asig = {
+      placa: p,
+      id_mecanico: id_mec,
+      fecha : fe
+    }
+
     _controlador
-      .modificarAsignacion(u, placa, id_mecanico, fecha)
+      .modificarAsignacion(asig)
       .then((respuestaDB) => {
         res.send({ ok: true, mensaje: "la asignacion ha sido modificado correctamente", info: respuestaDB });
       })

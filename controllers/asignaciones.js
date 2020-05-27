@@ -53,7 +53,7 @@ let guardarAsignacion = async (asignacion)=> {
 let consultarAsignaciones = async () => {
     try {
         let _servicio = new servicioPg()
-        let sql = `SELECT * from mantenimientos`;
+        let sql = `SELECT * from public.mantenimientos`;
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
     } catch (error) {
@@ -69,12 +69,13 @@ let eliminarAsignacion = async (asignacion) => {
     let id_mecanico = asignacion.id_mecanico;
     let placa = asignacion.placa;
     let fecha = asignacion.fecha;
-    console.log("asignacion desde metodo controlador: " + asignacion)
+    console.log("asignacion desde metodo controlador: " + asignacion.placa + " " + asignacion.id_mecanico + " " + asignacion.fecha); 
 
     try {
       let _servicio = new servicioPg();
-      let sql = `DELETE FROM public.asignaciones
-       WHERE placa ='${placa}' AND fecha = '${fecha}' AND id_mecanico = '${id_mecanico}'`;
+      let sql = `DELETE FROM public.mantenimientos
+       WHERE placa ='${asignacion.placa}' AND fecha = '${asignacion.fecha}' AND id_mecanico = '${asignacion.id_mecanico}'`;
+       console.log(sql);
       let respuesta = await _servicio.ejecutarSql(sql);
       return respuesta;
     } catch (error) {
@@ -82,20 +83,21 @@ let eliminarAsignacion = async (asignacion) => {
     }
   };
 
-  let modificarAsignacion = async (asignacion, placa, id_mecanico, fecha) => {
-    if (asignacion.placa != placa) {
+  let modificarAsignacion = async (asignacion, asignacion2) => {
+    
+    if (asignacion.placa != asignacion2.placa) {
       throw {
         ok: false,
         mensaje: "la placa de la asignacion no corresponde a la enviada.",
       };
     }
-    if (asignacion.id_mecanico != id_mecanico) {
+    if (asignacion.id_mecanico != asignacion2.id_mecanico) {
         throw {
         ok: false,
         mensaje: "el id del mecanico de la asignacion no corresponde a la enviada.",
         };
     }
-    if (asignacion.fecha != fecha) {
+    if (asignacion.fecha != asignacion2.fecha) {
         throw {
         ok: false,
         mensaje: "la fecha de la asignacion no corresponde a la enviada.",
@@ -103,11 +105,13 @@ let eliminarAsignacion = async (asignacion) => {
     } 
     try{
         let _servicio = new servicioPg();
-        let sql = `UPDATE public.asignaciones
+        let sql = `UPDATE public.mantenimiento
         SET 
-        placa='${asignacion.placa}',
-        id_mecanico='${asignacion.id_mecanico}',
-        fecha='${asignacion.fecha}'
+        placa='${asignacion2.placa}',
+        id_mecanico='${asignacion2.id_mecanico}',
+        fecha='${asignacion2.fecha}',
+        trabajos_realizados='${asignacion2.trabajos_realizados}',
+        horas_invertidas='${asignacion2.horas_invertidas}'
         WHERE placa ='${placa}';`;
 
         let respuesta = await _servicio.ejecutarSql(sql);

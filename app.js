@@ -22,8 +22,8 @@ app.use(rutas_asignaciones);
 
 //const rutas_mantenimiento = require("./routes/modulo_mantenimiento");
 //app.use(rutas_mantenimiento);
-const rutas_autenticacion = require("./routes/autenticacion");
-app.use(rutas_autenticacion);
+//const rutas_autenticacion = require("./routes/autenticacion");
+//app.use(rutas_autenticacion);
 
   // Puerto
   //const port = process.env.PORT || 3001;
