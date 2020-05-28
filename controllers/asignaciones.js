@@ -62,6 +62,20 @@ let consultarAsignaciones = async () => {
 }
 
 /**
+ * 
+ */
+let consultarAsignacion = async (id_mecanico) => {
+    try {
+        let _servicio = new servicioPg()
+        let sql = `SELECT * from public.mantenimientos where id_mecanico = '${id_mecanico}'`;
+        let respuesta = await _servicio.ejecutarSql(sql);
+        return respuesta;
+    } catch (error) {
+        throw{ok: false, err: error };
+    }
+}
+
+/**
  * Eliminar un asignacion
  * @param {*} asignacion una asignacion
  */
@@ -105,14 +119,15 @@ let eliminarAsignacion = async (asignacion) => {
     } 
     try{
         let _servicio = new servicioPg();
-        let sql = `UPDATE public.mantenimiento
+        let sql = `UPDATE public.mantenimientos
         SET 
-        placa='${asignacion2.placa}',
-        id_mecanico='${asignacion2.id_mecanico}',
-        fecha='${asignacion2.fecha}',
-        trabajos_realizados='${asignacion2.trabajos_realizados}',
-        horas_invertidas='${asignacion2.horas_invertidas}'
-        WHERE placa ='${placa}';`;
+        placa='${asignacion.placa}',
+        id_mecanico='${asignacion.id_mecanico}',
+        fecha='${asignacion.fecha}',
+        trabajos_realizados='${asignacion.trabajos_realizados}',
+        horas_invertidas='${asignacion.horas_invertidas}'
+        WHERE placa ='${asignacion2.placa}' AND id_mecanico =
+         '${asignacion2.id_mecanico}' AND fecha = '${asignacion2.fecha}' ;`;
 
         let respuesta = await _servicio.ejecutarSql(sql);
         return respuesta;
@@ -124,4 +139,4 @@ let eliminarAsignacion = async (asignacion) => {
   };
 
 //exportando metodos en forma de JSON
-module.exports = {validarAsignacion, guardarAsignacion, consultarAsignaciones, eliminarAsignacion, modificarAsignacion};
+module.exports = {validarAsignacion, guardarAsignacion, consultarAsignaciones, consultarAsignacion, eliminarAsignacion, modificarAsignacion};

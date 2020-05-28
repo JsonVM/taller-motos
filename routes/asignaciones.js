@@ -16,6 +16,19 @@ router.get("/asignaciones", (req, res) => {
 });
 
 /**
+ * Consultando los mantenimientos de un mecanico
+ */
+router.get("/asignaciones/:id_mecanico", (req, res) => {
+  let id = req.params.id_mecanico;
+  _controlador.consultarAsignacion(id).then(respuestaDB => {
+      let registros = respuestaDB.rows;
+      res.send({ ok: true, info: registros, mensaje: "asignaciones consultados" });
+    }).catch(error => {
+      res.send(error);
+    });
+});
+
+/**
  * Guardando una asignacion
  */
 router.post("/asignaciones", (req, res) => {
@@ -77,7 +90,7 @@ router.put("/asignaciones/:placa/:id_mecanico/:fecha", (req, res) => {
     }
 
     _controlador
-      .modificarAsignacion(asig)
+      .modificarAsignacion(u, asig)
       .then((respuestaDB) => {
         res.send({ ok: true, mensaje: "la asignacion ha sido modificado correctamente", info: respuestaDB });
       })
